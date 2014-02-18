@@ -12,15 +12,11 @@ UNDERLINE='\033[4m'
 echo -e "${GREEN}STARTING CLEAN"
 echo -e "${NONE}"
 
-#####################################
-# INCREASE VERSION AND AINT TO ICON  #
-#####################################
+echo -e "${PURPLE}##############################################"
+echo -e "${PURPLE}#                    CLEAN                   #"
+echo -e "${PURPLE}##############################################"
+echo -e "${NONE}"
 
-#buildkit bk_config.yml
-
-##########
-# CLEAN  #
-##########
 xctool -workspace CIP.xcworkspace -scheme CIP -configuration Debug -sdk iphonesimulator7.0 -destination platform='iOS Simulator',OS=7.0,name='iPhone Retina (4-inch)' clean
 
 if test $? -eq 0
@@ -35,26 +31,11 @@ if test $? -eq 0
 echo -e "${GREEN}STARTING BUILD"
 echo -e "${NONE}"
 
-##########
-# BUILD  #
-##########
-xctool -workspace CIP.xcworkspace -scheme CIP -configuration Debug -sdk iphonesimulator7.0 -destination platform='iOS Simulator',OS=7.0,name='iPhone Retina (4-inch)'
-
-if test $? -eq 0
-     then
-        echo -e "${GREEN}BUILD PASSED"
-     else
-        echo -e "${RED}BUILD FAILED"
-		echo -e "${NONE}"
-		exit 1
-     fi
-
-echo -e "${GREEN}STARTING UNIT TESTS"
+echo -e "${PURPLE}##############################################"
+echo -e "${PURPLE}#                    TEST                   #"
+echo -e "${PURPLE}##############################################"
 echo -e "${NONE}"
 
-##########
-# TEST  #
-##########
 xctool -workspace CIP.xcworkspace -scheme CIP -configuration Debug -sdk iphonesimulator7.0 -destination platform='iOS Simulator',OS=7.0,name='iPhone Retina (4-inch)' test
 
 if test $? -eq 0
@@ -66,33 +47,16 @@ echo -e "${NONE}"
 exit 1
 fi
 
-##########
-# BUILD FOR RELEASE  #
-##########
-xctool -workspace CIP.xcworkspace -scheme CIP -configuration Release -sdk iphoneos
-
-if test $? -eq 0
-then
-echo -e "${GREEN}BUILD FOR RELEASE PASSED"
-else
-echo -e "${RED}BUILD FOR RELEASE FAILED"
+echo -e "${PURPLE}##############################################"
+echo -e "${PURPLE}#                  ARCHIVE                   #"
+echo -e "${PURPLE}##############################################"
 echo -e "${NONE}"
-exit 1
-fi
 
-##########
-# ARCHIVE  #
-##########
-
-ipa build
-
-if test $? -eq 0
-then
-echo -e "${GREEN}ARCHIVE PASSED"
-else
-echo -e "${RED}ARCHIVE FAILED"
-echo -e "${NONE}"
-exit 1
-fi
+ipa build \
+  --workspace CIP.xcworkspace \
+  --scheme CIP \
+  --embed ./Provisioning/IPS.mobileprovision \
+  --clean \
+  --archive
 
 echo -e "${NONE}"
