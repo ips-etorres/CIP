@@ -21,7 +21,7 @@ echo -e "${NONE}"
 ##########
 # CLEAN  #
 ##########
-xctool -workspace CIP.xcworkspace -scheme CIP -configuration Release -sdk iphonesimulator7.0 -destination platform='iOS Simulator',OS=7.0,name='iPhone Retina (4-inch)' clean
+xctool -workspace CIP.xcworkspace -scheme CIP -configuration Debug -sdk iphonesimulator7.0 -destination platform='iOS Simulator',OS=7.0,name='iPhone Retina (4-inch)' clean
 
 if test $? -eq 0
      then
@@ -38,7 +38,7 @@ echo -e "${NONE}"
 ##########
 # BUILD  #
 ##########
-xctool -workspace CIP.xcworkspace -scheme CIP -configuration Release -sdk iphonesimulator7.0 -destination platform='iOS Simulator',OS=7.0,name='iPhone Retina (4-inch)'
+xctool -workspace CIP.xcworkspace -scheme CIP -configuration Debug -sdk iphonesimulator7.0 -destination platform='iOS Simulator',OS=7.0,name='iPhone Retina (4-inch)'
 
 if test $? -eq 0
      then
