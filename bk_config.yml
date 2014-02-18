@@ -1,0 +1,34 @@
+:tasks:
+  :increment_version:
+    :run: true
+    :options:
+  :decorate_icon:
+    :run: true
+    :options:
+  :xcode_build:
+    :run: false
+    :options:
+      :log: true
+  :run_tests:
+    :run: false
+    :options:
+      :log: true
+  :create_ipa:
+    :run: false
+    :options:
+      :log: false
+
+:configuration:
+  :app_name: "CIP"
+  :workspace: "./CIP.xcworkspace"
+  :info_plist: "./CIP/CIP-Info.plist"
+  :build_configuration: "Release"
+  :scheme: "CIP"
+  :sdk: "iphoneos"
+  :provisioning_profile: "./Provisioning/Wildcard_Development_Profile.mobileprovision"
+  :code_sign: "iPhone Distribution: Alpaca Labs"
+  :icon_dir: "./CIP/Icon/"
+  :build_dir: "./Builds/"
+
+:preferences:
+  :reports: "./Reports/"
