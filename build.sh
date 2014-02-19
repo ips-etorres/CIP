@@ -9,7 +9,19 @@ WHITE='\033[01;37m'
 BOLD='\033[1m'
 UNDERLINE='\033[4m'
 
+echo -e "${YELLOW}##############################################"
+echo -e "${YELLOW}#             xcodebuild version             #"
+echo -e "${YELLOW}##############################################"
+echo -e "${NONE}"
+
 xcodebuild -version
+
+echo -e "${YELLOW}##############################################"
+echo -e "${YELLOW}#         codesigning find-identity          #"
+echo -e "${YELLOW}##############################################"
+echo -e "${NONE}"
+
+security find-identity -p codesigning -v
 
 echo -e "${PURPLE}##############################################"
 echo -e "${PURPLE}#                    CLEAN                   #"
