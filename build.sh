@@ -28,8 +28,23 @@ if test $? -eq 0
 		exit 1
      fi
 
-echo -e "${GREEN}STARTING BUILD"
+
+echo -e "${PURPLE}##############################################"
+echo -e "${PURPLE}#                    BUILD                   #"
+echo -e "${PURPLE}##############################################"
 echo -e "${NONE}"
+
+xctool -workspace CIP.xcworkspace -scheme CIP -configuration Debug -sdk iphonesimulator7.0 -destination platform='iOS Simulator',OS=7.0,name='iPhone Retina (4-inch)'
+
+if test $? -eq 0
+     then
+        echo -e "${GREEN}BUILD PASSED"
+     else
+        echo -e "${RED}BUILD FAILED"
+        echo -e "${NONE}"
+        exit 1
+     fi
+
 
 echo -e "${PURPLE}##############################################"
 echo -e "${PURPLE}#                    TEST                   #"
