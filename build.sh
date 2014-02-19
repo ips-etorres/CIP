@@ -9,8 +9,7 @@ WHITE='\033[01;37m'
 BOLD='\033[1m'
 UNDERLINE='\033[4m'
 
-echo -e "${GREEN}STARTING CLEAN"
-echo -e "${NONE}"
+xcodebuild -version
 
 echo -e "${PURPLE}##############################################"
 echo -e "${PURPLE}#                    CLEAN                   #"
