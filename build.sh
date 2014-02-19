@@ -10,19 +10,75 @@ BOLD='\033[1m'
 UNDERLINE='\033[4m'
 
 echo -e "${YELLOW}##############################################"
-echo -e "${YELLOW}#             xcodebuild version             #"
+echo -e "${YELLOW}#         Display depencencies version       #"
 echo -e "${YELLOW}##############################################"
+echo 
+echo
+echo -e "${YELLOW}############ xcodebuild version ##############"
 echo -e "${NONE}"
 
-xcodebuild -version
+if [ -d "/Applications/Xcode.app" ] && 
+   [ $(xcodebuild -version | grep -c "5\\.") -eq 1 ]
+then
+  echo " + Xcode 5 found."
+else
+  echo " x Xcode 5 not found."
+  echo "   Install Xcode 5 from the Mac App Store."
+  exit 1
+fi
 
-echo -e "${YELLOW}##############################################"
-echo -e "${YELLOW}#         codesigning find-identity          #"
-echo -e "${YELLOW}##############################################"
+echo -e "${YELLOW}############ Ruby version ##############"
 echo -e "${NONE}"
 
+if test ! $(which ruby)
+then
+  echo " x You need to install Ruby >= 2.0.0"
+  exit 1
+else
+  if [ $(ruby -e 'puts RUBY_VERSION' | grep -c "2\\.0\\.0") -eq 1 ]
+  then
+    echo " + Ruby 2.0.0 found."
+  else
+    echo " + Ruby $(ruby -e 'puts RUBY_VERSION') found."
+    echo " - Ruby 2.0.0 is recommended."
+  fi
+fi
+
+echo -e "${YELLOW}############ xctool version ##############"
+echo -e "${NONE}"
+xctool -version
+echo 
+echo
+echo -e "${YELLOW}############ Cocoapods version ##############"
+echo -e "${NONE}"
+pod --version
+echo 
+echo
+echo -e "${YELLOW}############ Shenzen version ##############"
+echo -e "${NONE}"
+ipa --version
+echo 
+echo
+echo -e "${YELLOW}######## codesigning find-identity ###########"
+echo -e "${NONE}"
 security find-identity -p codesigning -v
-
+echo 
+echo
+echo -e "${YELLOW}########### Project version #################"
+echo -e "${NONE}"
+agvtool mvers -terse1
+echo 
+echo
+echo -e "${YELLOW}########### Show SDKs #################"
+echo -e "${NONE}"
+xcodebuild -showsdks
+echo 
+echo
+echo -e "${YELLOW}########### Show Schemes #################"
+echo -e "${NONE}"
+xcodebuild -list -workspace CIP.xcworkspace
+echo 
+echo
 echo -e "${PURPLE}##############################################"
 echo -e "${PURPLE}#                    CLEAN                   #"
 echo -e "${PURPLE}##############################################"
