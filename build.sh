@@ -74,4 +74,13 @@ ipa build \
   --clean \
   --archive
 
+if test $? -eq 0
+then
+echo -e "${GREEN}ARCHIVE PASSED"
+else
+echo -e "${RED}ARCHIVE FAILED"
+echo -e "${NONE}"
+exit 1
+fi
+
 echo -e "${NONE}"
